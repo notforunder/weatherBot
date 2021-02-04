@@ -17,6 +17,8 @@ wbot.on('message', async message => {
   let cont = message.content.slice(prefix.lenght).split(" ");
   let args = cont.slice(1);
 
+  // Usage : w!weather <YourCity>
+
   if(message.content.startsWith(prefix + 'weather')){
     console.log(`${message.author.tag} | ${message.author.id} - check the weather`)
 
