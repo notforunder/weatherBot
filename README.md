@@ -6,7 +6,7 @@ BOT_PREFIX=<your_bot_prefix>
 ```
 
 ## Running
-```npm run start:js```
+```npm run start:ts```
 
 ## Usage in Discord
 ```w!weather YourCity```
