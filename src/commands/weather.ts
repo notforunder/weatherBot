@@ -1,3 +1,4 @@
+import { MessageEmbed } from "discord.js";
 import { client } from "..";
 import { Command } from "../struct/Commands";
 const weather = require("weather-js");
@@ -13,9 +14,20 @@ export default new Command({
             if(!result) return message.reply("Couldn't find weather for that location.");
         
             let current = result[0].current;
-            let answer = `${current.skytext}\n${current.temperature}C temperature\n${current.feelslike}C feels like\n${current.humidity}% humidity\n${current.windspeed} mph wind speed.`;
-            message.channel.send(answer);
-            
+
+            const embed = new MessageEmbed()
+                .setTitle('Weather for ' + current.observationpoint)
+                .addField('Time of observation', current.observationtime, true)
+                .addField('Temperature', current.temperature + 'C', true)
+                .addField('Feels Like', current.feelslike + 'C', true)
+                .addField('Wind Speed', current.windspeed + 'mph', true)
+                .addField('Humidity', current.humidity + '%', true)
+                .addField('Sky', current.skytext, true)
+                .setThumbnail(current.imageUrl)
+                .setAuthor({name: 'Weather Module', iconURL: client.user.avatarURL()})
+                .setColor(0x00AE86)
+
+            message.channel.send({embeds: [embed]});
         });
     }
 })
